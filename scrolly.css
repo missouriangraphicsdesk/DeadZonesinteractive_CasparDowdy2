@@ -1,0 +1,98 @@
+:root {
+    --ink: #1d2a2e;
+    --paper: #fcee21;
+    --accent: #2f6f73;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  @import url("https://p.typekit.net/p.css?s=1&k=cxg4zhs&ht=tk&f=35759.35760.35761.35762&a=84539429&app=typekit&e=css");
+  
+  @font-face {
+  font-family:"ccmeanwhile";
+  src:url("https://use.typekit.net/af/5ac9e0/00000000000000007735aa90/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/5ac9e0/00000000000000007735aa90/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/5ac9e0/00000000000000007735aa90/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+  font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+  }
+  
+  @font-face {
+  font-family:"ccmeanwhile";
+  src:url("https://use.typekit.net/af/15ea89/00000000000000007735aa94/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/15ea89/00000000000000007735aa94/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/15ea89/00000000000000007735aa94/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("opentype");
+  font-display:auto;font-style:italic;font-weight:400;font-stretch:normal;
+  }
+  
+  @font-face {
+  font-family:"ccmeanwhile";
+  src:url("https://use.typekit.net/af/5b987e/00000000000000007735aa96/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/5b987e/00000000000000007735aa96/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/5b987e/00000000000000007735aa96/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("opentype");
+  font-display:auto;font-style:italic;font-weight:700;font-stretch:normal;
+  }
+  
+  @font-face {
+  font-family:"ccmeanwhile";
+  src:url("https://use.typekit.net/af/5b8da9/00000000000000007735aa9a/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/5b8da9/00000000000000007735aa9a/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/5b8da9/00000000000000007735aa9a/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+  font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+  }
+  
+  .tk-ccmeanwhile { font-family: "ccmeanwhile",sans-serif; }
+  
+  .regionlist {
+    flex: 1;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'ccmeanwhile';
+    color: var(--ink);
+    font-family: 16px;
+  }
+  
+  .story {
+    position: relative;   /* the boxes position themselves against this */
+  }
+  
+  .map {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 0;           /* image sits at the back */
+  }
+  
+  .box {
+    position: absolute;   /* required, or top/left do nothing */
+    z-index: 10;          /* boxes sit in front of the image */
+    max-width: 20rem;
+    max-height: 14rem;
+    padding: 1.0rem 1.5rem;
+    background: var(--paper);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .25);
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  
+  .box.visible {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .box h2 { margin: 0 0 .5rem; font-size: 1.0rem; }
+  .box p  { margin: 0; }
+  
+  
+  .steps {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .step { flex: 1; } /* each trigger gets an equal slice of the image height */
+  
+  .box.visible { opacity: 1; }
+  .pos-left.visible, .pos-right.visible { transform: none; }
+  .pos-top.visible, .pos-bottom.visible { transform: translate(-50%, 0); }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .box { transition: none; }
+  }
