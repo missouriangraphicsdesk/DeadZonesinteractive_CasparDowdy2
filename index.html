@@ -639,35 +639,7 @@
 
 			</div>
 
-			<script>
-				// Reveal .move elements as they scroll into view
-				document.querySelectorAll('.move').forEach(function (el) {
-				  if (!('IntersectionObserver' in window)) { el.classList.add('visible'); return; }
-				  new IntersectionObserver(function (entries) {
-					entries.forEach(function (e) {
-					  if (e.isIntersecting) e.target.classList.add('visible');
-					});
-				  }, { threshold: 0.05 }).observe(el);
-				});
-				
-				// Tabbed panel (Chart / Map)
-				(function () {
-				  var tabs = document.querySelectorAll('#slideshow-nav li');
-				  var slides = document.querySelectorAll('#slideshow .slide');
-				  function show(i) {
-					tabs.forEach(function (t, j) { t.classList.toggle('activeSlide', i === j); });
-					slides.forEach(function (s, j) {
-					  s.style.position = 'static';
-					  s.style.display = i === j ? 'block' : 'none';
-					});
-				  }
-				  tabs.forEach(function (t, i) {
-					t.style.cursor = 'pointer';
-					t.addEventListener('click', function () { show(i); });
-				  });
-				  show(0);
-				})();
-				</script>
+
 
 
 <!-- //////END SINGLE LAYER -  TAB PANEL   ///////////-->
@@ -693,7 +665,35 @@
 <!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- END OF GRAPHIC TEMPLATE ELEMENTS  -->
 <!-- DO NOT MODIFY OR DELETE ANYTHING BELOW HERE. -->
-
+<script>
+	// Reveal .move elements as they scroll into view
+	document.querySelectorAll('.move').forEach(function (el) {
+	  if (!('IntersectionObserver' in window)) { el.classList.add('visible'); return; }
+	  new IntersectionObserver(function (entries) {
+		entries.forEach(function (e) {
+		  if (e.isIntersecting) e.target.classList.add('visible');
+		});
+	  }, { threshold: 0.05 }).observe(el);
+	});
+	
+	// Tabbed panel (Chart / Map)
+	(function () {
+	  var tabs = document.querySelectorAll('#slideshow-nav li');
+	  var slides = document.querySelectorAll('#slideshow .slide');
+	  function show(i) {
+		tabs.forEach(function (t, j) { t.classList.toggle('activeSlide', i === j); });
+		slides.forEach(function (s, j) {
+		  s.style.position = 'static';
+		  s.style.display = i === j ? 'block' : 'none';
+		});
+	  }
+	  tabs.forEach(function (t, i) {
+		t.style.cursor = 'pointer';
+		t.addEventListener('click', function () { show(i); });
+	  });
+	  show(0);
+	})();
+	</script>
 
 
 	</body>
