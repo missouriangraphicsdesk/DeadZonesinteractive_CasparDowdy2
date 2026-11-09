@@ -11,10 +11,6 @@
 
         <!-- THESE ARE THE JAVASCRIPT FILES I ADDED -->
 
-		<script src="js/jquery-1.9.1.min.js"></script>
-		<script src="js/jquery-ui.min.js"></script>
-		<script src="js/jquery.cycle.all.min.js"></script>
-
 		<link rel="stylesheet" href="scrolly.css">
 		<link rel="stylesheet" href="https://use.typekit.net/cxg4zhs.css">
 		<!-- THE CSS STYLES START HERE -->
@@ -644,56 +640,34 @@
 			</div>
 
 			<script>
-			var currentSlide = 0;
-
-			        // panel stepper graphic initialize
-			        if ($('#site').find('#slideshow').length > 0){
-			            $('#site').find('#slideshow').cycle({
-			            	fx:     'fade',
-			                speed:  250,
-			                timeout:0,
-					startingSlide: currentSlide,
-			                nowrap: false,
-			                next:   '#next-btn',
-			                prev:   '#prev-btn',
-			                pager:  '#slideshow-nav',
-					after:   onAfter,
-			                pagerAnchorBuilder: function(idx, slide) {
-			                    // return selector string for existing anchor
-			                    return '#slideshow-nav li:eq(' + idx + ')';
-			                }
-			            });
-			            $('#next-panel').mouseenter(function() {
-			                $(this).addClass('hover')
-			            }).mouseout(function() {
-			                $(this).removeClass('hover')
-			            });
-			        }
-
-				function onAfter(curr, next, opts) {
-				    currentSlide = opts.currSlide;
-
-				    $('#next-btn').removeClass('arrowfaint');
-
-				    if (currentSlide == 4) {
-					$('#next-btn').addClass('arrowfaint');
-				    }
-
-			        }
-
-
-			        // left/right key press
-			        $(document).keydown(function(e) {
-			           //console.log(e.which);
-			            if (e.which == 37) { // left key
-			                $('#slideshow').cycle('prev');
-
-			            } else if (e.which == 39) { // right key
-			                $('#slideshow').cycle('next');
-
-			            }
-			        });
-        </script>
+				// Reveal .move elements as they scroll into view
+				document.querySelectorAll('.move').forEach(function (el) {
+				  if (!('IntersectionObserver' in window)) { el.classList.add('visible'); return; }
+				  new IntersectionObserver(function (entries) {
+					entries.forEach(function (e) {
+					  if (e.isIntersecting) e.target.classList.add('visible');
+					});
+				  }, { threshold: 0.05 }).observe(el);
+				});
+				
+				// Tabbed panel (Chart / Map)
+				(function () {
+				  var tabs = document.querySelectorAll('#slideshow-nav li');
+				  var slides = document.querySelectorAll('#slideshow .slide');
+				  function show(i) {
+					tabs.forEach(function (t, j) { t.classList.toggle('activeSlide', i === j); });
+					slides.forEach(function (s, j) {
+					  s.style.position = 'static';
+					  s.style.display = i === j ? 'block' : 'none';
+					});
+				  }
+				  tabs.forEach(function (t, i) {
+					t.style.cursor = 'pointer';
+					t.addEventListener('click', function () { show(i); });
+				  });
+				  show(0);
+				})();
+				</script>
 
 
 <!-- //////END SINGLE LAYER -  TAB PANEL   ///////////-->
@@ -720,31 +694,6 @@
 <!-- END OF GRAPHIC TEMPLATE ELEMENTS  -->
 <!-- DO NOT MODIFY OR DELETE ANYTHING BELOW HERE. -->
 
-				<script>
-					$(document).on("scroll", function() {
-					  var pageTop = $(document).scrollTop();
-					  var pageBottom = pageTop + $(window).height();
-					  var moves = $(".move");
-					  var start = $(".start");
-
-					  for (var i = 0; i < moves.length; i++) {
-					    var move = moves[i];
-
-						if ($(move).position().top < pageBottom) {
-						      $(move).addClass("visible");
-						    } else {
-						      $(move).removeClass("visible");
-						    }
-						}
-						if ($(start).position().top = pageTop)  {
-						      $(start).addClass("fade-out");
-						      $(start).removeClass("fade-in");
-						    } else {
-						      $(start).addClass("fade-in");
-						      $(start).removeClass("fade-out");
-						    }
-					});
-				</script>
 
 
 	</body>
